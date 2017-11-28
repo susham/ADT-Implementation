@@ -11,13 +11,32 @@ import Foundation
 
 var dict = Dict<(Int,Bool)>() //creating empty Dictionary object
 //print(dictionary)
-var key:String="abc";
-//test to insert values to the linked list.
-dict.insert(key:"abc",value:(1,false));
-dict.insert(key:"abcd",value:(2,true));
-dict.insert(key:"abcde",value:(3,false));
+var key: String="";
+var x=String(key.hashValue)
+print(x)
+
+var value: (Int, Bool)
+for i in 1..<500
+{
+    key="";
+    for _ in 1...i
+    {
+        key+="a"
+    }
+    if i % 2 == 0
+    {
+        value=(i,true)
+    }
+    else {
+    value=(i,false)
+    }
+    dict.insert(key:key,value:value);
+    
+}
+
+
 print("Inserting values completed")
-var searchresult=dict.lookup(key: "abcdef")
+var searchresult=dict.lookup(key: "aaa")
 print(searchresult as Any)
 
 
