@@ -21,7 +21,7 @@ for i in 1..<500
     key="";
     for _ in 1...i
     {
-        key+="a"
+        key+="aa"
     }
     if i % 2 == 0
     {
@@ -34,10 +34,25 @@ for i in 1..<500
     
 }
 
-
 print("Inserting values completed")
-var searchresult=dict.lookup(key: "aaa")
-print(searchresult as Any)
+
+
+
+
+for i in 1..<333
+{
+    key="";
+    for _ in 1...i
+    {
+        key+="aaa"
+    }
+
+    var searchresult = dict.lookup(key:key);
+    print("Value for key: ")
+    print(searchresult as Any)
+}
+
+
 
 
 
