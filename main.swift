@@ -37,8 +37,6 @@ for i in 1..<500
 print("Inserting values completed")
 
 
-
-
 for i in 1..<333
 {
     key="";
