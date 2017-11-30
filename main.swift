@@ -1,3 +1,4 @@
+
 //
 //  Client.swift
 //  Assignment
@@ -7,7 +8,7 @@
 //
 
 //creating empty Dictionary object by providing the dictionary values Type and accumulator type
-var dict = Dict<(Int,Bool),Int>()
+var dict = Dict<(Int,Bool)>()
 var key: String="";
 var value: (Int, Bool)
 
