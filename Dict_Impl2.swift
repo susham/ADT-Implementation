@@ -8,6 +8,7 @@
 
 import Foundation
 public class HashDict<T>: ADTDict {
+   
     func fold(acc: Int, f: (Int, String, T) -> Int) -> Int {
           //not implemented
         return 0
@@ -20,15 +21,13 @@ public class HashDict<T>: ADTDict {
     private class HashNode {
     var key: String!
     var value: V!
-    //var next: HashNode!
     }
     
-   // class HashTable {
-        private var buckets: Array<HashNode?>
+        private var hashTable: Array<HashNode?>
         
-        //initialize the buckets with nil values
+        //initialize the hashTable with nil values
         init(capacity: Int) {
-            self.buckets = Array<HashNode!>(repeating:nil, count: capacity)
+            self.hashTable = Array<HashNode!>(repeating:nil, count: capacity)
         }
         //compute the hash value to be used
         func createHash(_ Key: String) -> Int! {
@@ -40,7 +39,7 @@ public class HashDict<T>: ADTDict {
                 divisor += Int(c.value)
             }
             
-            remainder = divisor % buckets.count
+            remainder = divisor % hashTable.count
             return remainder
         }
     
@@ -50,27 +49,37 @@ public class HashDict<T>: ADTDict {
         
         //create a hashvalue using the key
         hashindex = self.createHash(key)
-        //print("Hashindex is \(hashindex)")
+        
         let dict: HashNode = HashNode()
         dict.key = key
         dict.value = value
-        //print("dict is \(dict)")
         
         //check for an existing bucket
-        if (buckets[hashindex] == nil) {
-            buckets[hashindex] = dict
+        
+        if (self.hashTable[hashindex] == nil) {
+            self.hashTable[hashindex] = dict
             print("Hashindex is \(hashindex)")
         }
         else {
             print("a collision occured for \(hashindex). implementing linear probing..")
-            
-            //update the chained list
-            repeat{
-                hashindex = hashindex + 1
-            }while(buckets[hashindex] != nil)
-            
-            buckets[hashindex] = dict
-            print("New hashindex is \(hashindex)")
+            if(self.hashTable[hashindex]?.key == key){
+                print("key exists in hashtable \(self.hashTable[hashindex]?.key)")
+                self.hashTable[hashindex]?.value = value
+            }
+            else{
+                //update the chained list
+                repeat{
+                    hashindex = hashindex + 1
+                    if hashindex >= self.hashTable.count {
+                        fatalError("Hash table is full")
+                        
+                        //func abort();
+                    }
+                }while(self.hashTable[hashindex] != nil)
+                
+                self.hashTable[hashindex] = dict
+                print("New hashindex is \(hashindex)")
+            }
         }
     }
     
@@ -78,46 +87,43 @@ public class HashDict<T>: ADTDict {
         return [:]
     }
     
-    func lookup(key: String) -> T? {
-        //not implemented
+    func lookup(key: String) throws -> T? {
         var hashindex: Int!
-        var bucketValue: T!
+        var hashTableValue: T!
         
         //create a hashvalue using the key
         hashindex = self.createHash(key)
-        print("Hashindex in lookup is \(hashindex)")
+        //print("Hashindex in lookup is \(hashindex)")
         
-        let currbucket = self.buckets
-        print(currbucket[hashindex]?.key as Any)
+        let currHashTable = self.hashTable
+        //print(currHashTable[hashindex]?.key as Any)
         
         
-        if(currbucket[hashindex]?.key == key){
-            bucketValue = currbucket[hashindex]?.value
+        if(currHashTable[hashindex]?.key == key){
+            hashTableValue = currHashTable[hashindex]?.value
         }
         else{
             
             hashindex = hashindex + 1
-                /*guard hashindex < buckets.capacity  else{
-                    throw Error
-                }*/
-                while(buckets[hashindex] != nil){
-                if (currbucket[hashindex]?.key == key){
-                    break
+                if hashindex >= self.hashTable.count {
+                    throw NSError(domain: "", code: 0, userInfo: [NSLocalizedFailureErrorKey : "Array index out of bounds"])
                 }
                 else{
-                    hashindex = hashindex + 1
-                    continue
-                }
-              
-                }
-           
-                bucketValue = currbucket[hashindex+1]?.value
-        
-            /*catch (Error ){
-                fatalError("Index out of range")
-            }*/
+                    while(self.hashTable[hashindex] != nil){
+                    if (currHashTable[hashindex]?.key == key){
+                        break
+                    }
+                    else{
+                        hashindex = hashindex + 1
+                        continue
+                    }
+                  
+                    }
+                    //print("Hashindex in lookup is \(hashindex)")
+                    hashTableValue = currHashTable[hashindex]?.value
+            }
         }
-        return bucketValue
+        return hashTableValue
     }
     
 }
