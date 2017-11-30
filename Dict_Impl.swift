@@ -9,9 +9,7 @@
 import Foundation
 
 //ADT implementation using LinkedList.
-public class Dict<T,U>: ADTDict {
-
-    typealias A=U
+public class Dict<T>: ADTDict {
     typealias V = T
     
     private class Node {
