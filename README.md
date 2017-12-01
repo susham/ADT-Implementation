@@ -33,14 +33,25 @@ protocol ADTDict {
 The original ADT has the Fold function, but we have not defined the fold function in our protocol, since the protocols doesn't allow generic functions fold<A> which allows to take the type throught function call rather than from the class<V>. Hence we have created the generic fold function in protocols implementation class. 
 
 ##############################################################################################################################
-After downloading the files, change the directory in the command line to directory where files are downloaded.
+After downloading the files, 
+Below are the Steps for Executing swift program in Linux environment:
 
-Below are the steps to run the program
+1 -> Copy our source files to any of the directory (Ex. Downloads/Assignment9)
 
-1) Compile the .swift files using the below command to generate the executable:
-Swiftc *.swift -o Assginment9
-2) Run the executable:
-./Assignment9
+2 -> In the terminal, run the command to set up the path to execute swift program  
+
+		export PATH=/u/apt/swift/bin/:$PATH
+
+3 -> Now change directory to the directory where source code files are placed.
+
+4 -> To compile these files, use following command	
+
+		swiftc *.swift -o Assignment9
+
+5 -> Run Executables using following command
+
+		./Assignment9
+
 
 
 
