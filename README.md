@@ -37,9 +37,9 @@ After downloading the files, change the directory in the command line to directo
 
 Below are the steps to run the program
 
-1) Compile the .swift files using the below command to generate the executable
+1) Compile the .swift files using the below command to generate the executable:
 Swiftc *.swift -o Assginment9
-2) Run the executable
+2) Run the executable:
 ./Assignment9
 
 
