@@ -116,16 +116,11 @@ import Foundation
         {
             key+="aaa"
         }
-        do{
             let hashSearchResult = try hashDict.lookup(key:key);
             if(hashSearchResult != nil){
             hcount=hcount+1;
             }
-        }
-        catch {
-            hasException=true;
-            print("Array index out of bounds exception raised, while lookup function is executed");
-        }
+        
     }
     if(hcount != 166 && !hasException)
     {
