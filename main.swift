@@ -116,16 +116,11 @@ import Foundation
         {
             key+="aaa"
         }
-            let hashSearchResult = try hashDict.lookup(key:key);
-            if(hashSearchResult != nil){
-            hcount=hcount+1;
-            }
+            let hashSearchResult = hashDict.lookup(key:key);
+            
         
     }
-    if(hcount != 166 && !hasException)
-    {
-    print("Error, dictionary needs to have 166 lookup keys, but found:",hcount)
-    }
+    
 
     //higher order fold function passing the counter function as parameter
      var hashValue_count=hashDict.fold(acc: 0,function:counter);
