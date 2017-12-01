@@ -9,7 +9,6 @@
 import Foundation
 enum HashTableError: Error{
     case hashTableFull
-    case ArrayIndexOutOfBounds
 }
 
 public class HashDict<T>: ADTDict {
@@ -44,6 +43,7 @@ public class HashDict<T>: ADTDict {
     //insert the value using a specified hash
     func insert(key: String, value: T) throws {
         var hashindex: Int!
+        var found: Bool = false
         
         //create a hashvalue using the key
         hashindex = self.createHash(key)
@@ -65,15 +65,28 @@ public class HashDict<T>: ADTDict {
                 self.hashTable[hashindex]?.value = value
             }
             else{
-               
-                repeat{
-                    hashindex = hashindex + 1
-                    if hashindex > (hashTable.count-1) {
-                        throw HashTableError.hashTableFull
+               for index in hashindex..<(hashTable.count-1){
+                    if self.hashTable[index] == nil{
+                        hashindex = index
+                        found = true
                     }
-                }while(self.hashTable[hashindex] != nil)
+                }
                 
-                self.hashTable[hashindex] = ADTdict
+                if(found != true){
+                    for index in 0..<hashindex{
+                        if self.hashTable[index] == nil{
+                            hashindex = index
+                            found = true
+                        }
+                    }
+                }
+                
+                if(found != true){
+                    throw HashTableError.hashTableFull
+                }
+                else{
+                    self.hashTable[hashindex] = ADTdict
+                }
             }
         }
     }
@@ -81,6 +94,7 @@ public class HashDict<T>: ADTDict {
     func lookup(key: String) throws -> T? {
         var hashindex: Int!
         var hashTableValue: T!
+        var keyFound: Bool = false
         
         //create a hashvalue using the key
         hashindex = self.createHash(key)
@@ -90,23 +104,28 @@ public class HashDict<T>: ADTDict {
             hashTableValue = currHashTable[hashindex]?.value
         }
         else{
-            hashindex = hashindex + 1
-                if hashindex > (self.hashTable.count-1) {
-                    throw HashTableError.ArrayIndexOutOfBounds
+            for index in hashindex..<(hashTable.count-1){
+                if (currHashTable[hashindex]?.key == key){
+                    hashindex = index
+                    keyFound = true
                 }
-                else{
-                    while(self.hashTable[hashindex] != nil){
+            }
+            
+            if(keyFound != true){
+                for index in 0..<hashindex{
                     if (currHashTable[hashindex]?.key == key){
-                        break
-                    }
-                    else{
-                        hashindex = hashindex + 1
-                        continue
+                        hashindex = index
+                        keyFound = true
                     }
                 }
+            }
+            
+            if(keyFound != true){
+                hashTableValue = nil
+            }
+            else{
                 hashTableValue = currHashTable[hashindex]?.value
             }
-        }
         return hashTableValue
     }
     
