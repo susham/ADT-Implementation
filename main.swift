@@ -1,3 +1,4 @@
+
 //
 //  Client.swift
 //  Assignment
@@ -10,14 +11,15 @@ import Foundation
 
 /*************************************************LinkedListImplementation*********************************************/
 
-    //creating empty Dictionary object by providing value type of the dictionary
-    var dict = Dict<(Int,Bool)>()
-    var key: String="";
-    var value: (Int, Bool)
-    
-    //Testing code for Dictionary Insert, for each i value 2i 'a's are generated as key and if the i value is even, then the dictionary value will be a tuple(i,true) else (i,false)
-    for i in 1..<500
-    {
+
+//creating empty Dictionary object by providing the dictionary values Type and accumulator type
+var dict = Dict<(Int,Bool)>()
+var key: String="";
+var value: (Int, Bool)
+
+//Testing code for Dictionary Insert, for each i value 2i 'a's are generated as key and if the i value is even, then the dictionary value will be a tuple(i,true) else (i,false)
+for i in 1..<500
+{
         key="";
         for _ in 1...i
         {
@@ -64,14 +66,13 @@ import Foundation
     print("Nodes with bool value as true:",value_count)
     print("\n\n")
 
+
 /************************************************HashImplementation*******************************************************/
 
     //creating empty Dictionary object for hash table implementaion by providing value type of the dictionary and the capacity for the hash table.
     var hashDict = HashDict<(Int,Bool)>(capacity: 1000)
-
-    //Testing code for Dictionary Insert, for each i value 2i 'a's are generated as key and if the i value is even, then the dictionary value will be a tuple(i,true) else (i,false)
-    var Key: String="";
-    var Value: (Int, Bool)
+    var key: String="";
+    var value: (Int, Bool)
 
     for i in 1..<500
     {
@@ -113,9 +114,12 @@ import Foundation
         }
     }
 
+
     //higher order fold function passing the counter function as parameter
     var hashValue_count=hashDict.fold(acc: 0,function:counter);
     print("Nodes with bool value as true:",hashValue_count)
+
+
 
 
 
