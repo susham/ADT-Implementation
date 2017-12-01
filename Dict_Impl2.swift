@@ -91,7 +91,7 @@ public class HashDict<T>: ADTDict {
         }
     }
     
-    func lookup(key: String) throws -> T? {
+    func lookup(key: String) -> T? {
         var hashindex: Int!
         var hashTableValue: T!
         var keyFound: Bool = false
