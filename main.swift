@@ -10,6 +10,7 @@ import Foundation
 
 /*************************************************LinkedListImplementation*********************************************/
 
+    print("Testing ADT's LinkedList implementation started....")
     //creating empty Dictionary object by providing value type of the dictionary
     var dict = Dict<(Int,Bool)>()
     var key: String="";
@@ -71,11 +72,13 @@ import Foundation
     if(value_count != 249){
      print("Error, expected number of nodes with dictionary value bool=true is:249.But, got:",value_count)
      }
+    print("Testing ADT's LinkedList implementation completed....")
     print("\n\n")
 
 /************************************************HashImplementation*******************************************************/
 
     //creating empty Dictionary object for hash table implementaion by providing value type of the dictionary and the capacity for the hash table.
+    print("Testing ADT's HastTable implementation started....")
     var hashDict = HashDict<(Int,Bool)>(capacity: 1000)
 
     //Testing code for Dictionary Insert, for each i value 2i 'a's are generated as key and if the i value is even, then the dictionary value will be a tuple(i,true) else (i,false)
@@ -135,6 +138,7 @@ import Foundation
      if(hashValue_count != 249){
      print("Error, expected number of nodes with dictionary value bool=true is:249.But, got:",hashValue_count)
      }
+    print("Testing ADT's HashTable implementation completed....")
     print("\n\n")
 
 
