@@ -108,6 +108,7 @@ public class HashDict<T>: ADTDict {
                 if (currHashTable[hashindex]?.key == key){
                     hashindex = index
                     keyFound = true
+                    break
                 }
             }
             
@@ -116,6 +117,7 @@ public class HashDict<T>: ADTDict {
                     if (currHashTable[hashindex]?.key == key){
                         hashindex = index
                         keyFound = true
+                        break
                     }
                 }
             }
