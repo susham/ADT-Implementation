@@ -116,7 +116,7 @@ import Foundation
         {
             key+="aaa"
         }
-        hashDict.lookup(key:key);
+       _ = hashDict.lookup(key:key);
     }
     
 
