@@ -11,6 +11,6 @@ import Foundation
 protocol ADTDict {
     associatedtype V
     func insert(key:String,value:V) throws
-    func lookup(key:String) throws-> V?
+    func lookup(key:String) -> V?
     
 }
