@@ -2,8 +2,8 @@
 //  Client.swift
 //  Assignment
 //
-//  Created by Group 8  on 11/27/17.
-//  Copyright © 2017 Susham Kumar. All rights reserved.
+//  Created by Group 8(Susham,Haritha,Rohan) on 11/27/17.
+//  Copyright © 2017 Group 8(Susham,Haritha,Rohan). All rights reserved.
 //
 
 import Foundation
