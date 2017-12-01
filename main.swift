@@ -116,9 +116,7 @@ import Foundation
         {
             key+="aaa"
         }
-            let hashSearchResult = hashDict.lookup(key:key);
-            
-        
+        hashDict.lookup(key:key);
     }
     
 
