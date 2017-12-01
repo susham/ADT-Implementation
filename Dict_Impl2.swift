@@ -126,8 +126,9 @@ public class HashDict<T>: ADTDict {
             else{
                 hashTableValue = currHashTable[hashindex]?.value
             }
-            return hashTableValue
+            
         }
+        return hashTableValue
     }
     
     func fold<A>(acc: A,function: (A, String, T) -> (A)) -> A{
