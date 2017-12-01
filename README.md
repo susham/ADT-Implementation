@@ -30,7 +30,7 @@ protocol ADTDict {
     
 }
 
-The original ADT has the Fold function, but we have not defined the fold function in our protocol, since the protocols doesn't allow generic functions. Hence we have created the generic fold function in protocol implementation class. 
+The original ADT has the Fold function, but we have not defined the fold function in our protocol, since the protocols doesn't allow generic functions fold<A> which allows to take the type throught function call rather than from the class<V>. Hence we have created the generic fold function in protocols implementation class. 
 
 ##############################################################################################################################
 After downloading the files, change the directory in the command line to directory where files are downloaded.
