@@ -2,8 +2,8 @@
 //  Dict_Impl.swift
 //  Assignment
 //
-//  Created by Susham Kumar on 11/27/17.
-//  Copyright © 2017 Susham Kumar. All rights reserved.
+//  Created by Group 8(Susham,Haritha,Rohan) on 11/27/17.
+//  Copyright © 2017 Group 8(Susham,Haritha,Rohan). All rights reserved.
 //
 
 import Foundation
@@ -29,18 +29,20 @@ public class Dict<T>: ADTDict {
     self.e = nil;
     }
     
-    //This function inserts the key,value into the dictionary and allows only a unique keys in the dictionary
+    //This function inserts the key,value into the dictionary and allows only unique keys in the dictionary
     //if a key already exists then its value is updated in the dictionary.
     func insert(key:String,value:V){
         
         if(e == nil) //LinkedList is empty.
         {
+
         self.e=Node(Key:key,value:value,next:nil);
         }
         else
         {
           if(lookup(key: key) == nil){
             //key doesn't exist in the LinkedList
+
                 if(self.e?.next == nil)
                 {
                     self.e?.next=Node(Key:key,value:value,next:nil);
@@ -62,9 +64,11 @@ public class Dict<T>: ADTDict {
                         }
                     }
                 }
+
           }
           else{
             //dictionary has a key exists, update the value
+
                 var current=e;
                 while(current != nil)
                 {
@@ -74,12 +78,16 @@ public class Dict<T>: ADTDict {
                         print("updated value");
                         break;
                     }
+
                   current=current?.next
+
                 }
             }
         }
     }
     
+
+
     //Searches the dictionary for the key provided and returns its value.
     func lookup(key: String) -> T? {
         var current=e;
@@ -87,7 +95,7 @@ public class Dict<T>: ADTDict {
         {
             if(current?.key == key)
             {
-             return current?.value
+                return current?.value
             }
             else
             {

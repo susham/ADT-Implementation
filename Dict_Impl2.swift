@@ -1,90 +1,80 @@
 //
 //  Dict_Impl2.swift
-//  AbstractDataType
+//  Assignment
 //
-//  Created by Rakesh Palam on 11/28/17.
-//  Copyright © 2017 Harita Palam. All rights reserved.
+//  Created by Group 8(Susham,Haritha,Rohan) on 11/28/17.
+//  Copyright © 2017 Group 8(Susham,Haritha,Rohan). All rights reserved.
 //
 
 import Foundation
+enum HashTableError: Error{
+    case hashTableFull
+}
+
 public class HashDict<T>: ADTDict {
-   
-    func fold(acc: Int, f: (Int, String, T) -> Int) -> Int {
-          //not implemented
-        return 0
-    }
-    
-    typealias A = Int
     typealias V = T
-    typealias dict = [String : V]
-    
+
     private class HashNode {
     var key: String!
     var value: V!
     }
     
-        private var hashTable: Array<HashNode?>
-        
-        //initialize the hashTable with nil values
-        init(capacity: Int) {
-            self.hashTable = Array<HashNode!>(repeating:nil, count: capacity)
-        }
-        //compute the hash value to be used
-        func createHash(_ Key: String) -> Int! {
-            var remainder: Int = 0
-            var divisor: Int = 0
-            
-            //obtain the ascii value of each character
-            for c in Key.unicodeScalars {
-                divisor += Int(c.value)
-            }
-            
-            remainder = divisor % hashTable.count
-            return remainder
-        }
+    private var hashTable: Array<HashNode?>
     
-    //add the value using a specified hash
-    func insert(key: String, value: T)  {
+    //initialize the hashTable with nil values
+    init(capacity: Int) {
+        self.hashTable = Array<HashNode!>(repeating:nil, count: capacity)
+    }
+    
+    //compute the hash value to be used
+    func createHash(_ Key: String) -> Int! {
+        var remainder: Int = 0
+        var divisor: Int = 0
+        
+        //obtain the ascii value of each character
+        for c in Key.unicodeScalars {
+            divisor += Int(c.value)
+        }
+        
+        remainder = divisor % hashTable.count
+        return remainder
+    }
+    
+    //insert the value using a specified hash
+    func insert(key: String, value: T) throws {
         var hashindex: Int!
         
         //create a hashvalue using the key
         hashindex = self.createHash(key)
         
-        let dict: HashNode = HashNode()
-        dict.key = key
-        dict.value = value
+        let ADTdict: HashNode = HashNode()
+        ADTdict.key = key
+        ADTdict.value = value
         
-        //check for an existing bucket
+        //check for an existing entry
         
         if (self.hashTable[hashindex] == nil) {
-            self.hashTable[hashindex] = dict
-            print("Hashindex is \(hashindex)")
+            self.hashTable[hashindex] = ADTdict
         }
         else {
-            print("a collision occured for \(hashindex). implementing linear probing..")
+            //a collision occured...implementing linear probing!!!
+           
+            //update the hashtable
             if(self.hashTable[hashindex]?.key == key){
-                print("key exists in hashtable \(self.hashTable[hashindex]?.key)")
                 self.hashTable[hashindex]?.value = value
             }
             else{
-                //update the chained list
+               
                 repeat{
                     hashindex = hashindex + 1
-                    if hashindex >= self.hashTable.count {
-                        fatalError("Hash table is full")
-                        
-                        //func abort();
+                    if hashindex > (hashTable.count-1) {
+                        throw HashTableError.hashTableFull
                     }
                 }while(self.hashTable[hashindex] != nil)
                 
-                self.hashTable[hashindex] = dict
-                print("New hashindex is \(hashindex)")
+                self.hashTable[hashindex] = ADTdict
             }
         }
-    }
-    
-    func empty() -> dict{
-        return [:]
     }
     
     func lookup(key: String) throws -> T? {
@@ -93,19 +83,14 @@ public class HashDict<T>: ADTDict {
         
         //create a hashvalue using the key
         hashindex = self.createHash(key)
-        //print("Hashindex in lookup is \(hashindex)")
         
         let currHashTable = self.hashTable
-        //print(currHashTable[hashindex]?.key as Any)
-        
-        
         if(currHashTable[hashindex]?.key == key){
             hashTableValue = currHashTable[hashindex]?.value
         }
         else{
-            
             hashindex = hashindex + 1
-                if hashindex >= self.hashTable.count {
+                if hashindex > (self.hashTable.count-1) {
                     throw NSError(domain: "", code: 0, userInfo: [NSLocalizedFailureErrorKey : "Array index out of bounds"])
                 }
                 else{
@@ -117,13 +102,24 @@ public class HashDict<T>: ADTDict {
                         hashindex = hashindex + 1
                         continue
                     }
-                  
-                    }
-                    //print("Hashindex in lookup is \(hashindex)")
-                    hashTableValue = currHashTable[hashindex]?.value
+                }
+                hashTableValue = currHashTable[hashindex]?.value
             }
         }
         return hashTableValue
+    }
+    
+    func fold<A>(acc: A,function: (A, String, T) -> (A)) -> A{
+        var p=acc;
+        let currHashTable = self.hashTable;
+        for hashEntry in currHashTable
+        {
+            if(hashEntry?.key != nil)
+            {
+                p=function(p,(hashEntry?.key)!,(hashEntry?.value)!);
+            }
+        }
+        return p;
     }
     
 }
