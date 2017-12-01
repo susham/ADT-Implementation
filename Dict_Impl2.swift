@@ -9,6 +9,7 @@
 import Foundation
 enum HashTableError: Error{
     case hashTableFull
+    case ArrayIndexOutOfBounds
 }
 
 public class HashDict<T>: ADTDict {
@@ -91,7 +92,7 @@ public class HashDict<T>: ADTDict {
         else{
             hashindex = hashindex + 1
                 if hashindex > (self.hashTable.count-1) {
-                    throw NSError(domain: "", code: 0, userInfo: [NSLocalizedFailureErrorKey : "Array index out of bounds"])
+                    throw HashTableError.ArrayIndexOutOfBounds
                 }
                 else{
                     while(self.hashTable[hashindex] != nil){
